@@ -1,4 +1,4 @@
-FROM treehouses/nginx:3.11
+FROM treehouses/nginx:1.18
 
 RUN apk --no-cache upgrade
 RUN apk add --no-cache curl git
