@@ -1,13 +1,15 @@
 #!/bin/bash
 #set -x
+source sha_function.sh
 
 if [ $# -le 1 ]; then
     echo "missing parameters."
     exit 1
 fi
 
-dir=$(dirname $0)
-sha=$($dir/manifest-nginx-sha.sh $@)       # $1 treehouses/nginx:latest  amd64|arm|arm64
+#dir=$(dirname $0)
+#sha=$($dir/manifest-nginx-sha.sh $@)       # $1 treehouses/nginx:latest  amd64|arm|arm64
+sha=$(get_manifest_sha $@)       # $1 treehouses/nginx:latest  amd64|arm|arm64
 echo $sha
 base_image="treehouses/nginx@$sha"
 echo $base_image
@@ -23,14 +25,3 @@ if [ -n "$sha" ]; then
        # echo "$arch nginx version is $version"
         docker push $tag
 fi
-
-#archs="rpi x86 arm64"
-#if [ -n "$sha" ]; then
-#    base_image=vmnet8/alpine@$sha
-#    echo $base_image
-#    for arch in $archs; do
-#        tag=vmnet8/nginx-tags:$arch
-#        sed "s|{{base_image}}|$base_image|g" Dockerfile.template > /tmp/Dockerfile.$arch
-#        #docker build -t $tag -f /tmp/Dockerfile.$arch
-#    done
-#fi

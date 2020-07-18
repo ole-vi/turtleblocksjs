@@ -1,13 +1,13 @@
 FROM {{base_image}}
 
-RUN apk --no-cache upgrade
-RUN apk add --no-cache curl git
+RUN apk --no-cache upgrade \
+    && apk add --no-cache curl git
 
 WORKDIR /var/lib/nginx
 
-RUN rm -rf html
-RUN git clone --depth=1 https://github.com/sugarlabs/turtleblocksjs.git
-RUN mv -f turtleblocksjs html
+RUN rm -rf html \
+    && git clone --depth=1 https://github.com/sugarlabs/turtleblocksjs.git \
+    && mv -f turtleblocksjs html
 
 EXPOSE 80 443
 
