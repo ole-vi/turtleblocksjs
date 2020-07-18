@@ -7,8 +7,6 @@ if [ $# -le 1 ]; then
     exit 1
 fi
 
-#dir=$(dirname $0)
-#sha=$($dir/manifest-nginx-sha.sh $@)       # $1 treehouses/nginx:latest  amd64|arm|arm64
 sha=$(get_manifest_sha $@)       # $1 treehouses/nginx:latest  amd64|arm|arm64
 echo $sha
 base_image="treehouses/nginx@$sha"

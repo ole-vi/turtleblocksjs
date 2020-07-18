@@ -47,18 +47,6 @@ get_manifest_sha (){
     done < "$2".txt
 }
 
-compare (){
-    result=$(is_base $1 $2)
-    version1=$(image_version $3)
-    version2=$(image_version $4)
-    if [ $result == "true" ] || [ "$version1" != "$version2" ];
-    then
-        echo "true"
-    else
-        echo "false"
-    fi
-}
-
 create_manifest (){
     local repo=$1
     local tag1=$2
