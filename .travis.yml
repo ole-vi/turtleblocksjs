@@ -29,12 +29,13 @@ script:
 - echo $flag_arm64
 - flag=$(compare "treehouses/turtleblocksjs@"$turtle_arm_sha "treehouses/nginx@"$nginx_arm_sha "treehouses/turtleblocksjs@"$turtle_amd64_sha "treehouses/nginx@"$nginx_amd64_sha "treehouses/turtleblocksjs@"$turtle_arm64_sha "treehouses/nginx@"$nginx_arm64_sha)
 - echo $flag
+before_deploy:
 - echo "$DOCKERPASS" | docker login -u sevenseas --password-stdin
 - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 - "./docker-build.sh treehouses/nginx:latest arm"
 - "./docker-build.sh treehouses/nginx:latest arm64"
 - "./docker-build.sh treehouses/nginx:latest amd64"
-before_deploy:
+#before_deploy: #in case we want to check the code
 - timetag=$(date +%Y%m%d%H%M)
 - echo $timetag
 - tag1="latest"
@@ -44,14 +45,14 @@ before_deploy:
   treehouses/turtleblocksjs-tags:arm treehouses/turtleblocksjs-tags:arm64
 - docker manifest inspect treehouses/turtleblocksjs:$tag1
 - docker manifest inspect treehouses/turtleblocksjs:$tag2
-#deploy:
-#- provider: script
-#  script: docker manifest push treehouses/turtleblocksjs:$tag1; docker manifest push
-#    treehouses/turtleblocksjs:$tag2
-#  skip_cleanup: true
-#  on:
-#    all_branches: true
-#    condition: "$flag = true"
+deploy:
+- provider: script
+  script: docker manifest push treehouses/turtleblocksjs:$tag1; docker manifest push
+    treehouses/turtleblocksjs:$tag2
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$flag = true"
 env:
   global:
   - secure: p/oMr9+Zmk991tu7JiNx1ySJ0LhzBFKHIGHJwhjSK0Cz0vhLv2Jw2ii9iW169mCFEut9LlGXwb8LeP54g/ZKfdj+RP+SsvrcUMyyZQaMQ12Fa0dC1hRu2+ovu+uffoH4IgoRt2Lc2YGi/Etr9QYLLdu6BD1Sx6KaSweEne1RCfXj2EyGsMqWWkE+N4xqhPsVICdjnmCXeg+ROVgOobtFjGn3BAujDsQBqpELWRAydGQNGgvYca8RQlLSnSTDNqrLEo4NyjyqKbvgAmp5UNDo6yA9MIQTUbbP7habpkrtAzR0+ilUAzsAc9x/6B0ua/eDaRVon5peIHnoM+kt5P5wNsZFt9spB1qsp/TL5Vif2wjvF9sMHO8baCOBI6yqc149Fmcpd6/JdQvyHt3vol8j9BcSG8y9Tr2GiceuwRTLWqgN6xHDFYsrOiSwddyY+BxK/Uqh50CZLKn/IQePfg/Hz+Qy1wRhiFiE9mYmcJ2BApc4hYT5LZ63KjeoJzoH6dP+p+AvXWeRAmYFvZiKtlPWJ9nEex+EhQ7d71icbBNxCmPcESoDgk6oHgA2qeThtXFUj8ApjuGsqNhJsXu6epHE+PnFB5+jllXNolo3sPDKB6cq1POzxb2AJDkzw56kxT3hzmyssBg0MqXZ46mpUOio233nEsuLpRAC8iIF+SeScKs=
