@@ -27,7 +27,7 @@ script:
 - echo $nginx_arm64_sha
 - flag_arm64=$(is_base "treehouses/nginx@"$nginx_arm64_sha "treehouses/turtleblocksjs@"$turtle_arm64_sha)
 - echo $flag_arm64
-- flag=$(compare "treehouses/turtleblocksjs@"$turtle_arm_sha "treehouses/nginx@"$nginx_arm_sha "treehouses/turtleblocksjs@"$turtle_amd64_sha "treehouses/nginx@"$nginx_amd64_sha "treehouses/turtleblocksjs@"$turtle_arm64_sha "treehouses/nginx@"$nginx_arm64_sha)
+- flag=$(compare "treehouses/nginx@"$nginx_arm_sha "treehouses/turtleblocksjs@"$turtle_arm_sha "treehouses/nginx@"$nginx_amd64_sha "treehouses/turtleblocksjs@"$turtle_amd64_sha "treehouses/nginx@"$nginx_arm64_sha "treehouses/turtleblocksjs@"$turtle_arm64_sha)
 - echo $flag
 before_deploy:
 - echo "$DOCKERPASS" | docker login -u sevenseas --password-stdin
