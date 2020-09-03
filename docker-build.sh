@@ -14,12 +14,7 @@ echo $base_image
 arch=$2   # arm arm64 amd64
 
 if [ -n "$sha" ]; then
-        tag=treehouses/turtleblocksjs-tags:$arch
-        #sed "s|{{base_image}}|$base_image|g" Dockerfile.template > /tmp/Dockerfile.$arch
-        sed "s|{{base_image}}|$base_image|g" Dockerfile.template > Dockerfile.$arch
-        #cat /tmp/Dockerfile.$arch
-        docker build -t $tag -f Dockerfile.$arch .
-       # version=$(docker run -it $tag /bin/sh -c "nginx -v" |awk '{print$3}')
-       # echo "$arch nginx version is $version"
-        docker push $tag
+   tag=treehouses/turtleblocksjs-tags:$arch
+   sed "s|{{base_image}}|$base_image|g" Dockerfile.template > Dockerfile.$arch
+   docker build -t $tag -f Dockerfile.$arch .
 fi
