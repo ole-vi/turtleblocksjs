@@ -55,10 +55,7 @@ compare (){
     result_arm=$(is_base $1 $2)
     result_arm64=$(is_base $3 $4)
     result_amd64=$(is_base $5 $6)
-#    version1=$(get_service_version $7) #current on the docker hub (latest)
-#    version2=$(get_service_version $8) #tag-amd64 newly built
-    if [ $result_arm == "false" ] || [ $result_amd64 == "false" ] || [ $result_arm64 == "false" ] 
-#    if [ $result_arm == "false" ] || [ $result_amd64 == "false" ] || [ $result_arm64 == "false" ] || [ "$version1" != "$version2" ];     #compare alpine and service versions
+    if [ $result_arm == "false" ] || [ $result_amd64 == "false" ] || [ $result_arm64 == "false" ]
     then
         echo "true"
     else

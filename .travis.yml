@@ -35,6 +35,9 @@ before_deploy:
 - "./docker-build.sh treehouses/nginx:latest arm"
 - "./docker-build.sh treehouses/nginx:latest arm64"
 - "./docker-build.sh treehouses/nginx:latest amd64"
+- "./deploy.sh arm"
+- "./deploy.sh arm64"
+- "./deploy.sh amd64"
 #before_deploy: #in case we want to check the code
 - timetag=$(date +%Y%m%d%H%M)
 - echo $timetag
