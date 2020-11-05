@@ -29,13 +29,12 @@ script:
 - echo $flag_arm64
 - flag=$(compare "treehouses/nginx@"$nginx_arm_sha "treehouses/turtleblocksjs@"$turtle_arm_sha "treehouses/nginx@"$nginx_amd64_sha "treehouses/turtleblocksjs@"$turtle_amd64_sha "treehouses/nginx@"$nginx_arm64_sha "treehouses/turtleblocksjs@"$turtle_arm64_sha)
 - echo $flag
-- flag="false"
 before_deploy:
 - echo "$DOCKERPASS" | docker login -u sevenseas --password-stdin
 - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-- build_image "treehouses/nginx:latest" arm "treehoues/turtleblocksjs" #base image is arm arch
-- build_image "treehouses/nginx:latest" amd64 "treehoues/turtleblocksjs" #base image is amd64 arch
-- build_image "treehouses/nginx:latest" arm64 "treehoues/turtleblocksjs" #base image is arm64 arch
+- build_image "treehouses/nginx:latest" arm "treehouses/turtleblocksjs" #base image is arm arch
+- build_image "treehouses/nginx:latest" amd64 "treehouses/turtleblocksjs" #base image is amd64 arch
+- build_image "treehouses/nginx:latest" arm64 "treehouses/turtleblocksjs" #base image is arm64 arch
 - deploy_image "treehouses/turtleblocksjs" arm
 - deploy_image "treehouses/turtleblocksjs" amd64
 - deploy_image "treehouses/turtleblocksjs" arm64
