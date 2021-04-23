@@ -6,7 +6,7 @@ on:
     - cron: '0 */8 * * *'
 
 jobs: 
-  apache-docker-image-build:
+  turtle-docker-image-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +18,5 @@ jobs:
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
           repo="jleekwong/apache"
+          source .github/workflows/utils.sh
+          alpine_arm_sha=$(get_manifest_sha "treehouses/alpine:latest" "arm")
