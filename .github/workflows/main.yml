@@ -17,3 +17,4 @@ jobs:
       - name: treehouses apache
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
+          repo="jleekwong/apache"
