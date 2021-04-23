@@ -20,3 +20,7 @@ jobs:
           repo="jleekwong/apache"
           source .github/workflows/utils.sh
           alpine_arm_sha=$(get_manifest_sha "treehouses/alpine:latest" "arm")
+          echo "alpine arm"
+          echo $alpine_arm_sha
+          nginx_arm_sha=$(get_manifest_sha "nginx:latest" "arm")
+          echo "nginx arm"
