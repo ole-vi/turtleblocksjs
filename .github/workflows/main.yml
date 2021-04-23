@@ -24,3 +24,11 @@ jobs:
           echo $alpine_arm_sha
           nginx_arm_sha=$(get_manifest_sha "nginx:latest" "arm")
           echo "nginx arm"
+          echo $nginx_arm_sha
+          flag_arm=$(is_base "treehouses/alpine@"$alpine_arm_sha "nginx@"$nginx_arm_sha)
+          echo "flag arm"
+          echo $flag_arm
+          alpine_amd64_sha=$(get_manifest_sha "treehouses/alpine:latest" "amd64")
+          echo $alpine_amd64_sha
+          nginx_amd64_sha=$(get_manifest_sha "nginx:latest" "amd64")
+          echo $nginx_amd64_sha
