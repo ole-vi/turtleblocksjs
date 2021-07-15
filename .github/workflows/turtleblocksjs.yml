@@ -21,8 +21,8 @@ jobs:
       - name: treehouses turtleblocksjs
         run: |
           export DOCKER_CLI_EXPERIMENTAL=enabled
-          repo="treehouses/turtleblocksjs"
-          base="treehouses/nginx"
+          repo="dyeh123/turtleblocksjs"
+          base="dyeh123/nginx"
           source .github/workflows/utils.sh
           echo "amd64"
           baseamd64=$(get_variant_sha "$base" "latest" "amd64")
